@@ -2,8 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import Webcam from "react-webcam";
 import html2canvas from "html2canvas";
 import { Select } from "antd";
-import { usePredictMutation } from "../api/PredictApi";
-import { ICamera } from "../interface";
+import { usePredictMutation } from "../../api/PredictApi";
+import { ICamera } from "../../interface";
 
 export default function PredictPage() {
   const webcamRef = useRef(null);

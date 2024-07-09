@@ -1,1 +1,1 @@
-export { default as PredictPage } from "./PredictPage";
+export { default as PredictPage } from "./predict";
