@@ -16,7 +16,6 @@ export default function PredictPage() {
     const getCameraDevices = async () => {
       try {
         const devices = await navigator.mediaDevices.enumerateDevices();
-        console.log("devices:", devices);
 
         const cameras: ICamera[] = devices.filter(
           (device) => device.kind === "videoinput"

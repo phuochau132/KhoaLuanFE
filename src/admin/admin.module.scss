@@ -1,15 +1,20 @@
 .teamplateAdmin {
     .bodyContentWrapper {
         display: flex;
-
     }
 }
 
 .bodyContentWrapper {
     .sidebar {
-        width: 320px;
+        width: 20%;
         height: 100vh;
         background-color: black;
         padding: 10px
+    }
+}
+.sidebarHeader{
+    padding:  30px 15px;
+    .logo{
+        width: 90px;
     }
 }
