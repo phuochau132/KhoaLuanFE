@@ -1,8 +1,11 @@
-.teamplateAdmin {
+.templateAdmin {
     .bodyContentWrapper {
         display: flex;
+        flex-direction: row;
     }
 }
+
+// sidebar
 
 .bodyContentWrapper {
     .sidebar {
@@ -12,9 +15,20 @@
         padding: 10px
     }
 }
-.sidebarHeader{
-    padding:  30px 15px;
-    .logo{
+
+.sidebarHeader {
+    padding: 30px 15px;
+
+    .logo {
         width: 90px;
+    }
+}
+
+// content
+.bodyContentWrapper {
+    .content {
+        .wrapper {
+            padding: 24px
+        }
     }
 }
