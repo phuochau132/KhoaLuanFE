@@ -2,6 +2,9 @@
     .bodyContentWrapper {
         display: flex;
         flex-direction: row;
+        .content {
+            flex: 1;
+        }
     }
 }
 
@@ -12,7 +15,7 @@
         width: 20%;
         height: 100vh;
         background-color: black;
-        padding: 10px
+        padding: 10px;
     }
 }
 
@@ -27,8 +30,26 @@
 // content
 .bodyContentWrapper {
     .content {
-        .wrapper {
-            padding: 24px
+        background-color: black;
+        height: 100vh;
+        display: flex;
+        .container {
+            width: 90%;
+            padding: 24px;
+            background-color: white;
+            height: 90%;
+            margin: auto;
+            border-radius: 16px;
         }
+    }
+}
+
+.header {
+    .breadcrumb {
+        padding: 10px 0;
+        .wrapper{
+            gap: 5px
+        }
+
     }
 }

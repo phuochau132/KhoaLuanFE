@@ -8,3 +8,9 @@ export interface ICamera {
   kind: string;
   label: string;
 }
+export interface PageAdmin {
+    tabName: string;
+    icon: React.ReactNode;
+    content: React.ReactNode;
+}
+
