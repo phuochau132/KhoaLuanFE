@@ -105,7 +105,7 @@ export default function AdminPage() {
                   </div>
                 </div>
                 <div className={cx("headerRight")}>
-                  <Button
+                    {content?.tabName=="list product"? <Button
                     onClick={() => {
                       handleTabActivated(
                         {
@@ -119,7 +119,22 @@ export default function AdminPage() {
                     variant="contained"
                   >
                     Create Product
-                  </Button>
+                  </Button>:<Button
+                    onClick={() => {
+                      handleTabActivated(
+                        {
+                          tabName: "list product",
+                          icon: <ProductIcon />,
+                          content: <ProductCreation />,
+                        },
+                        setTabActivated
+                      );
+                    }}
+                    variant="contained"
+                  >
+                    Go To Back
+                  </Button> }
+                 
                 </div>
               </div>
             </header>

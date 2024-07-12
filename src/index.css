@@ -60,7 +60,12 @@ svg {
   animation: spin 1s linear infinite;
   z-index: 10;
 }
-
+.title{
+    
+}
+.container{
+    padding: 40px
+}
 @keyframes spin {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
@@ -68,4 +73,19 @@ svg {
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
   }
+}
+.fieldset {
+    padding: 10px 0;
+    width: 45%;
+}
+.fieldset label{
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+}
+.fieldset .input {
+    width: 100%;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 8px;
 }
