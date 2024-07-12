@@ -9,8 +9,13 @@ export interface ICamera {
   label: string;
 }
 export interface PageAdmin {
-    tabName: string;
-    icon: React.ReactNode;
-    content: React.ReactNode;
+  tabName: string;
+  icon: React.ReactNode;
+  content: React.ReactNode;
 }
-
+export interface ProductCreation {
+  label_id: Number;
+  image: string;
+  product_name: string;
+  price: Number;
+}

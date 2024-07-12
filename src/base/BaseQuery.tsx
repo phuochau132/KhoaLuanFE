@@ -9,12 +9,22 @@ export const axiosBaseQuery: BaseQueryFn<
   { data: any }
 > = async ({ url, method, data }) => {
   try {
-    const result = await axios({
-      url: baseURL + url,
-      method,
-      data,
-    });
-    return { data: result.data };
+    if (method === "Delete") {
+      const result = await axios({
+        url: baseURL + url + `/${data.id}`,
+        method,
+      });
+
+      return { data: result.data, status: result.statusText };
+    } else {
+      const result = await axios({
+        url: baseURL + url,
+        method,
+        data,
+      });
+      console.log("result.statusText ", result.statusText);
+      return { data: result.data, status: result.statusText };
+    }
   } catch (error) {
     console.log("error", error);
 

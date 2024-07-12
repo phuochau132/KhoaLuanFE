@@ -2,6 +2,7 @@
     .bodyContentWrapper {
         display: flex;
         flex-direction: row;
+
         .content {
             flex: 1;
         }
@@ -33,6 +34,8 @@
         background-color: black;
         height: 100vh;
         display: flex;
+
+
         .container {
             width: 90%;
             padding: 24px;
@@ -40,6 +43,8 @@
             height: 90%;
             margin: auto;
             border-radius: 16px;
+            position: relative;
+
         }
     }
 }
@@ -47,9 +52,16 @@
 .header {
     .breadcrumb {
         padding: 10px 0;
-        .wrapper{
-            gap: 5px
-        }
 
+        .wrapper {
+            gap: 5px;
+        }
+    }
+
+    >.wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 }

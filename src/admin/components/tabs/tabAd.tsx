@@ -8,7 +8,6 @@ interface TabAdProps {
   children?: React.ReactNode;
   item: any;
   onClick: (
-    event: React.MouseEvent<HTMLDivElement>,
     item: any,
     callback: any
   ) => void;
@@ -42,7 +41,7 @@ const TabAd: React.FC<TabAdProps> = ({
         data-name={item.tabName}
         data-type={isParentElement ? "parent" : "children"}
         onClick={(e) => {
-          onClick(e, item, callback);
+          onClick(item, callback);
         }}
       >
         <div className={cx("tabLeft", "fl")}>
