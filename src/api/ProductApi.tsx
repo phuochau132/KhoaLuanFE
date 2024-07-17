@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "../base/BaseQuery";
-import { ProductCreation } from "../interface";
+import { ProductCreation, ProductUpdate } from "../interface";
 
 const ProductApi = createApi({
   reducerPath: "productApi",
@@ -28,6 +28,13 @@ const ProductApi = createApi({
         data: product,
       }),
     }),
+    updateProduct: builder.mutation({
+      query: (product: ProductUpdate) => ({
+        url: `/product`,
+        method: "Put",
+        data: product,
+      }),
+    }),
   }),
 });
 
@@ -35,5 +42,6 @@ export const {
   useProductQuery,
   useDelProductMutation,
   useCreateProductMutation,
+  useUpdateProductMutation,
 } = ProductApi;
 export default ProductApi;

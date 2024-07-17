@@ -2,7 +2,13 @@ import classNames from "classnames/bind";
 import styles from "./admin.module.scss";
 import { TabAd } from "./components";
 import { useState, useCallback } from "react";
-import { ProductIcon, HomeIcon, ArrowLeftIcon } from "../assets/icon";
+import {
+  ArrowBack as ArrowBackIcon,
+  HomeOutlined as HomeOutlinedIcon,
+  AddOutlined as AddOutlinedIcon,
+  ArrowBackIosRounded as ArrowBackIosRoundedIcon,
+} from "@mui/icons-material";
+import { ProductIcon } from "../icon";
 import { ProductPage } from "./page";
 
 import { PageAdmin } from "../interface";
@@ -17,12 +23,10 @@ const pages = [
     children: [
       {
         tabName: "list product",
-        icon: <ProductIcon />,
         content: <ProductPage />,
       },
       {
         tabName: "create product",
-        icon: <ProductIcon />,
         content: <ProductCreation />,
       },
     ],
@@ -32,7 +36,11 @@ const pages = [
 export default function AdminPage() {
   const [tabActivated, setTabActivated] = useState("list product");
   const [parentTabActivated, setParentTabActivated] = useState("Product");
-  const [content, setContent] = useState<PageAdmin | null>(null);
+  const [content, setContent] = useState<PageAdmin | null>({
+    tabName: "list product",
+    icon: <ProductIcon />,
+    content: <ProductPage />,
+  });
   const handleTabActivated = useCallback(
     (item: any, callback: any) => {
       if (item.isParent) {
@@ -98,43 +106,52 @@ export default function AdminPage() {
                   <h1 className={cx("title")}>{content && content.tabName}</h1>
                   <div className={cx("breadcrumb")}>
                     <div className={cx("wrapper", "fl")}>
-                      <HomeIcon />
-                      <ArrowLeftIcon />
+                      <HomeOutlinedIcon />
+                      <ArrowBackIosRoundedIcon fontSize="small" />
                       <span>{content && content.tabName}</span>
                     </div>
                   </div>
                 </div>
                 <div className={cx("headerRight")}>
-                    {content?.tabName=="list product"? <Button
-                    onClick={() => {
-                      handleTabActivated(
-                        {
-                          tabName: "create product",
-                          icon: <ProductIcon />,
-                          content: <ProductCreation />,
-                        },
-                        setTabActivated
-                      );
-                    }}
-                    variant="contained"
-                  >
-                    Create Product
-                  </Button>:<Button
-                    onClick={() => {
-                      handleTabActivated(
-                        {
-                          tabName: "list product",
-                          icon: <ProductIcon />,
-                          content: <ProductCreation />,
-                        },
-                        setTabActivated
-                      );
-                    }}
-                    variant="contained"
-                  >
-                    Go To Back
-                  </Button> }
-                 
+                  {content?.tabName == "list product" ? (
+                    <Button
+                      onClick={() => {
+                        handleTabActivated(
+                          {
+                            tabName: "create product",
+                            icon: <ProductIcon />,
+                            content: <ProductCreation />,
+                          },
+                          setTabActivated
+                        );
+                      }}
+                      variant="contained"
+                    >
+                      <AddOutlinedIcon />
+                      <span>Create Product</span>
+                    </Button>
+                  ) : (
+                    <Button
+                      style={{
+                        background: "white",
+                        color: "black",
+                        borderRadius: "#333",
+                      }}
+                      onClick={() => {
+                        handleTabActivated(
+                          {
+                            tabName: "list product",
+                            icon: <ProductIcon />,
+                            content: <ProductPage />,
+                          },
+                          setTabActivated
+                        );
+                      }}
+                      variant="contained"
+                    >
+                      <ArrowBackIcon /> <span>Go To Back</span>
+                    </Button>
+                  )}
                 </div>
               </div>
             </header>

@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { PredictApi, ProductApi } from "../api";
-import tabReducer from "../slice/tabSlice";
+import productReducer from "../slice/productSlice";
 
 export const store = configureStore({
   reducer: {
     [PredictApi.reducerPath]: PredictApi.reducer,
     [ProductApi.reducerPath]: ProductApi.reducer,
-    tabAdmin: tabReducer,
+    product: productReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

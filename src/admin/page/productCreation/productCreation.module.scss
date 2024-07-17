@@ -6,6 +6,7 @@
     align-items: space-between;
     justify-content: space-between;
 
+
     .title {
         font-size: 22px;
         font-weight: 700;
@@ -26,6 +27,12 @@
     .fieldset {
         padding: 10px 0;
         width: 45%;
+
+        .fieldsetHeader {
+            display: flex;
+            justify-content: space-between;
+
+        }
 
         label {
             display: block;
@@ -62,5 +69,16 @@
 
     .btnAdd {
         float: right;
+        background-color: #1976d2;
+        color: white;
     }
+}
+
+.error {
+    font-size: 12px;
+    padding: 3px 10px;
+    font-weight: bold;
+    border-radius: 7px;
+    background-color: rgb(251, 175, 175);
+    color: red
 }

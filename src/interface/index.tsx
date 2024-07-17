@@ -14,8 +14,13 @@ export interface PageAdmin {
   content: React.ReactNode;
 }
 export interface ProductCreation {
-  label_id: Number;
   image: string;
-  product_name: string;
   price: Number;
+  product_name: string;
+}
+export interface ProductUpdate {
+  id: Number;
+  image: string;
+  price: Number;
+  product_name: string;
 }

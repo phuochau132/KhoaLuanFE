@@ -17,13 +17,21 @@ export const axiosBaseQuery: BaseQueryFn<
 
       return { data: result.data, status: result.statusText };
     } else {
-      const result = await axios({
-        url: baseURL + url,
-        method,
-        data,
-      });
-      console.log("result.statusText ", result.statusText);
-      return { data: result.data, status: result.statusText };
+      if (method === "Put") {
+        const result = await axios({
+          url: baseURL + url + `/${data.id}`,
+          method,
+          data,
+        });
+        return { data: result.data, status: result.statusText };
+      } else {
+        const result = await axios({
+          url: baseURL + url,
+          method,
+          data,
+        });
+        return { data: result.data, status: result.statusText };
+      }
     }
   } catch (error) {
     console.log("error", error);

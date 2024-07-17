@@ -4,10 +4,14 @@
   padding: 0;
   margin: 0;
   text-transform: capitalize;
+  --color-title: #1976d2;
 }
 
 body {
   font-family: "Roboto", sans-serif;
+}
+.container {
+  position: relative;
 }
 svg {
   width: 20px;
@@ -28,24 +32,7 @@ svg {
   background-color: #d9d9d9;
   margin: 10px 0;
 }
-/* animation */
-@keyframes rotate180 {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-}
-.container {
-  position: relative;
-}
-.backgroundOverLay {
-  position: absolute;
-  background-color: rgba(176, 176, 176, 0.8);
-  left: 0;
-  right: 0;
-}
+
 .isLoading:after {
   content: " ";
   position: absolute;
@@ -60,12 +47,52 @@ svg {
   animation: spin 1s linear infinite;
   z-index: 10;
 }
-.title{
-    
+
+.container {
+  padding: 40px;
 }
-.container{
-    padding: 40px
+
+.fieldset {
+  padding: 10px 0;
+  width: 45%;
 }
+.fieldset label {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+}
+.fieldset .input {
+  width: 100%;
+  margin-top: 10px;
+  height: 40px;
+  border-radius: 8px;
+}
+.icon-back,
+.icon-plus {
+  margin-right: 5px;
+}
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus {
+  outline: none;
+}
+.modal .ant-modal-title {
+  font-size: 25px;
+}
+
+.ant-modal-title,
+.title {
+  color: var(--color-title) !important;
+}
+/* animation */
+
+@keyframes rotate180 {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
 @keyframes spin {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);
@@ -74,18 +101,7 @@ svg {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
-.fieldset {
-    padding: 10px 0;
-    width: 45%;
-}
-.fieldset label{
-    display: block;
-    font-size: 15px;
-    font-weight: 500;
-}
-.fieldset .input {
-    width: 100%;
-    margin-top: 10px;
-    height: 40px;
-    border-radius: 8px;
+.reactEasyCrop_CropArea {
+  width: 100% !important;
+  height: 100% !important;
 }

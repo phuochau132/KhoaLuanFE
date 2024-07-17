@@ -65,3 +65,15 @@
         align-items: center;
     }
 }
+
+.headerRight {
+    button {
+        font-weight: 550;
+        display: flex;
+        align-items: center;
+
+        span {
+            margin-top: 1px;
+        }
+    }
+}

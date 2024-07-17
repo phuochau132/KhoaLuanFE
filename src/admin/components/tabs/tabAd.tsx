@@ -1,16 +1,13 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "./tab.module.scss";
 import classNames from "classnames/bind";
-import { ProductIcon, ArrowIcon } from "../../../assets/icon";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const cx = classNames.bind(styles);
 interface TabAdProps {
   children?: React.ReactNode;
   item: any;
-  onClick: (
-    item: any,
-    callback: any
-  ) => void;
+  onClick: (item: any, callback: any) => void;
   isParentElement?: boolean;
   tabActivated: string;
   callback: (
@@ -51,7 +48,7 @@ const TabAd: React.FC<TabAdProps> = ({
         <div className={cx("tabRight", "fl")}>
           {isParentElement && (
             <div className={cx("iconOpen", "icon")}>
-              <ArrowIcon />
+              <ArrowBackIcon />
             </div>
           )}
         </div>
