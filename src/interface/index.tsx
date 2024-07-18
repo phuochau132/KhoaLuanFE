@@ -24,3 +24,16 @@ export interface ProductUpdate {
   price: Number;
   product_name: string;
 }
+
+export interface Product {
+  id: number;
+  label_id: number;
+  image: string;
+  price: number;
+  product_name: string;
+}
+
+export interface ProductPredict extends Product {
+  image_scan: string
+}
+
