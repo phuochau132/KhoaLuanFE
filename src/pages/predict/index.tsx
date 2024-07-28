@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import Webcam from "react-webcam";
-import html2canvas from "html2canvas";
 import { Button, Image, Input, Select } from "antd";
 import { usePredictMutation } from "../../api/PredictApi";
 import { ICamera, ProductPredict } from "../../interface";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // css
 import styles from "./predict.module.scss";
 import classNames from "classnames/bind";
@@ -16,6 +17,7 @@ import {
 } from "@mui/x-data-grid";
 import Block from "../block";
 import { ShoppingCartOutlined } from "@mui/icons-material";
+import { log, timeStamp } from "console";
 const cx = classNames.bind(styles);
 const initialRows: GridRowsProp = [];
 export default function PredictPage() {
@@ -30,6 +32,13 @@ export default function PredictPage() {
     style: 'currency',
     currency: 'VND',
   });
+  const [pageSize, setPageSize] = useState<number>(5);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+  });
 
   const [rows, setRows] = useState(initialRows);
   const [visible, setVisible] = useState(false);
@@ -43,8 +52,8 @@ export default function PredictPage() {
     setVisible(true)
   }
   const columns: GridColDef[] = [
-    { field: "id", headerName: "#", width: 100 },
-    { field: "label_id", headerName: "Label Id", width: 150 },
+    { field: "id", headerName: "#", width: 50 },
+    { field: "label_id", headerName: "Label Id", width: 100 },
     { field: "product_name", headerName: "Product Name", width: 150 },
     {
       field: 'image_scan',
@@ -68,6 +77,11 @@ export default function PredictPage() {
       ),
     },
     {
+      field: 'quantity',
+      headerName: 'Quantity',
+      width: 100,
+    },
+    {
       field: "actions",
       headerName: "Actions",
       width: 150,
@@ -87,8 +101,17 @@ export default function PredictPage() {
   };
   useEffect(()=>{
     if(data){
-      const newData : ProductPredict = {...data, image_scan : scanImage}
-      setRows((old)=>[...old, newData])
+      const newData : ProductPredict = {...data, image_scan : scanImage, quantity: 1}
+      setRows((oldRows) => {
+        const existingItemIndex = oldRows.findIndex(row => row.label_id === newData.label_id);
+        if (existingItemIndex !== -1) {
+          const newList = [...oldRows];
+          const updatedItem = { ...newList[existingItemIndex], quantity: newList[existingItemIndex].quantity + 1 };
+          newList[existingItemIndex] = updatedItem;
+          return newList;
+        }
+        return [newData, ...oldRows];
+      });
     }
   },[data])
   useEffect(() => {
@@ -122,13 +145,46 @@ export default function PredictPage() {
     predict(imageSrc);
  };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   const handleDeviceChange = (value: string) => {
     setSelectedDeviceId(value);
   };
 
+  const handlePayment = ()=>{
+    if(rows.length === 0){
+      toast.error('Chưa có sản phẩm để thanh toán');
+      return;
+    }
+
+    if(!formData.address || !formData.name || !formData.email || !formData.phone){
+      toast.error('Vui lòng điền đầy đủ thông tin trước khi thanh toán');
+      return;
+    }
+    
+  }
 
   return (
     <div className={cx("container")}>
+      <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={true}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      />
       <Image
         width={200}
         style={{
@@ -175,7 +231,10 @@ export default function PredictPage() {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSizeOptions={[1, 2]}
+            pageSize={pageSize}
+            rowsPerPageOptions={[2, 5, 7]}
+            pagination
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           />
         </Block>
 
@@ -183,23 +242,23 @@ export default function PredictPage() {
         <Block title="Information">
           <div className={cx("fieldset")}>
             <label htmlFor="">Customer Name</label>
-            <Input className={cx("input")} placeholder="Basic usage" />
+            <Input onChange={handleChange} name="name" value={formData.name} className={cx("input")} placeholder="Enter Fullname" />
           </div>
           <div className={cx("fieldset")}>
             <label htmlFor="">Address</label>
-            <Input className={cx("input")} placeholder="Basic usage" />
+            <Input onChange={handleChange} name="address" value={formData.address}  className={cx("input")} placeholder="Enter Address" />
           </div>
           <div className={cx("fieldset")}>
             <label htmlFor="">Email</label>
-            <Input className={cx("input")} placeholder="Basic usage" />
+            <Input onChange={handleChange} name="email" value={formData.email} className={cx("input")} placeholder="Enter Email" />
           </div>
           <div className={cx("fieldset")}>
             <label htmlFor="">Phone Number</label>
-            <Input className={cx("input")} placeholder="Basic usage" />
+            <Input onChange={handleChange} name="phone" value={formData.phone} className={cx("input")} placeholder="Enter phone" />
           </div>
         </Block>
       </div>
-      <Button icon={<ShoppingCartOutlined />} iconPosition={'start'} style={{float:'right', backgroundColor:'#06bfe2', color:'white', padding:'20px 20px'}}>
+      <Button onClick={handlePayment} icon={<ShoppingCartOutlined />} iconPosition={'start'} style={{float:'right', backgroundColor:'#06bfe2', color:'white', padding:'20px 20px'}}>
             Payment
           </Button>
       </div>

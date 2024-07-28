@@ -35,5 +35,6 @@ export interface Product {
 
 export interface ProductPredict extends Product {
   image_scan: string
+  quantity: number
 }
 
