@@ -14,6 +14,7 @@ import { ProductPage } from "./page";
 import { PageAdmin } from "../interface";
 import { Button } from "@mui/material";
 import ProductCreation from "./page/productCreation";
+import OrderPage from "./page/order";
 const cx = classNames.bind(styles);
 const pages = [
   {
@@ -31,6 +32,12 @@ const pages = [
       },
     ],
   },
+  {
+    isParent: true,
+    tabName: "order",
+    icon: <ProductIcon />,
+    content: <OrderPage />,
+  },
 ];
 
 export default function AdminPage() {
@@ -44,14 +51,19 @@ export default function AdminPage() {
   const handleTabActivated = useCallback(
     (item: any, callback: any) => {
       if (item.isParent) {
+        console.log(item.tabName);
         if (item.tabName == parentTabActivated) {
           callback("");
+          console.log(item.tabName);
         } else {
           callback(item.tabName);
         }
+        if (item.tabName == "order") {
+          setContent(item);
+        }
       } else {
-        callback(item.tabName);
         setContent(item);
+        callback(item.tabName);
       }
     },
     [tabActivated, parentTabActivated]
@@ -73,6 +85,7 @@ export default function AdminPage() {
               {pages.map((item, index) => {
                 return (
                   <TabAd
+                    haveChild={item.children?.length}
                     tabActivated={parentTabActivated}
                     onClick={handleTabActivated}
                     key={index}

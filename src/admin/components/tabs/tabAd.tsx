@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./tab.module.scss";
 import classNames from "classnames/bind";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const cx = classNames.bind(styles);
 interface TabAdProps {
@@ -15,6 +15,7 @@ interface TabAdProps {
     item: any,
     callback: any
   ) => void;
+  haveChild: boolean;
 }
 
 const TabAd: React.FC<TabAdProps> = ({
@@ -24,6 +25,7 @@ const TabAd: React.FC<TabAdProps> = ({
   isParentElement,
   tabActivated,
   callback,
+  haveChild,
 }) => {
   return (
     <div
@@ -46,9 +48,9 @@ const TabAd: React.FC<TabAdProps> = ({
           <span className={cx("name")}>{item.tabName}</span>
         </div>
         <div className={cx("tabRight", "fl")}>
-          {isParentElement && (
+          {isParentElement && haveChild && (
             <div className={cx("iconOpen", "icon")}>
-              <ArrowBackIcon />
+              <ExpandMoreIcon className={cx("iconItem")} />
             </div>
           )}
         </div>

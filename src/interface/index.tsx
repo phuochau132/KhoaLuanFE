@@ -34,7 +34,20 @@ export interface Product {
 }
 
 export interface ProductPredict extends Product {
-  image_scan: string
-  quantity: number
+  image_scan: string;
+  quantity: number;
+}
+export interface OrderDetail {
+  product_id: number;
+  quantity: number;
 }
 
+export interface CreateOrder {
+  customer_name: string;
+  address: string;
+  phone_number: string;
+  email: string;
+  order_date: Date;
+  total: number;
+  order_details: OrderDetail[];
+}
